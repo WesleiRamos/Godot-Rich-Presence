@@ -1,11 +1,11 @@
 # Godot-Rich-Presence
----
+
 Godot Rich Presence é uma biblioteca em GDNative para uso do rich presence do Discord na Godot engine 3.0.
 
 ![Rich Presence](https://i.imgur.com/5IxTNBL.png)
 
 ## Funções
----
+
 ### init(Dictionary initialize)
 Recebe um **dict** com as seguintes chaves:
 
@@ -62,7 +62,7 @@ Mais informações em [So, how does it work?](https://discordapp.com/developers/
 Desconecta do Discord
 
 ## Callbacks discord-rpc
----
+
 É possível definir alguns sinais para eventos do discord-rpc, quando os callbacks forem chamados um sinal será emitido, os sinais são:
 
 | sinal         | argumentos                             |
@@ -88,11 +88,11 @@ OBS: Eu apenas testei os eventos **ready** e **error**, acredito que os outros e
 Mais informações em [So, how does it work?](https://discordapp.com/developers/docs/rich-presence/how-to#so-how-does-it-work)
 
 ## Como usar
----
+
 Na pasta _example_ há um exemplo simples de como você deve usar.
 
 ## Compilando
----
+
 Clone este repositório e depois clone os seguintes repositórios:
 - https://github.com/discordapp/discord-rpc
 - https://github.com/GodotNativeTools/godot-cpp/tree/3.0
