@@ -8,12 +8,15 @@ using namespace godot;
  */
 static RichPresence* self = nullptr;
 
+
 /**
  */
 RichPresence::~RichPresence() {
 	Discord_Shutdown();
 	self = nullptr;
 }
+
+void RichPresence::_init() {}
 
 /**
  */
@@ -67,19 +70,19 @@ void RichPresence::onReady(const DiscordUser* discordUser) {
 	user[Variant("username")] = String(discordUser->username);
 	user[Variant("discriminator")] = String(discordUser->discriminator);
 	user[Variant("avatar")] = String(discordUser->avatar);
-	self->owner->emit_signal("ready", user);
+	self->emit_signal("ready", user);
 }
 
 void RichPresence::onDisconnected(int code, const char* message) {
-	self->owner->emit_signal("disconnected", code, message);
+	self->emit_signal("disconnected", code, message);
 }
 
 void RichPresence::onError(int code, const char* message) {
-	self->owner->emit_signal("error", code, message);
+	self->emit_signal("error", code, message);
 }
 
 void RichPresence::onJoin(const char* secret) {
-	self->owner->emit_signal("join_game", secret);
+	self->emit_signal("join_game", secret);
 }
 
 void RichPresence::onJoinRequest(const DiscordUser* request) {
@@ -88,11 +91,11 @@ void RichPresence::onJoinRequest(const DiscordUser* request) {
 	userRequest[Variant("username")] = String(request->username);
 	userRequest[Variant("discriminator")] = String(request->discriminator);
 	userRequest[Variant("avatar")] = String(request->avatar);
-	self->owner->emit_signal("join_request", userRequest);
+	self->emit_signal("join_request", userRequest);
 }
 
 void RichPresence::onSpectateGame(const char* secret) {
-	self->owner->emit_signal("spectate_game", secret);
+	self->emit_signal("spectate_game", secret);
 }
 /** DISCORD CALLBACKS **/
 

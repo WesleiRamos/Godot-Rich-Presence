@@ -37,7 +37,6 @@ if platform == "osx":
 	env.Append(LINKFLAGS = ["-arch", "x86_64", "-framework", "Cocoa", "-Wl,-undefined,dynamic_lookup"])
 	
 	target_path += "osx"
-	godot_cpp_library += ".osx.64"
 
 
 elif platform == "linux":
@@ -45,7 +44,6 @@ elif platform == "linux":
 	env.Append(LINKFLAGS = ["-Wl,-R,\"$$ORIGIN\""])
 	
 	target_path += "linux" + str(target_arch)
-	godot_cpp_library += ".linux." + str(target_arch)
 
 
 elif platform == "windows":
@@ -55,19 +53,20 @@ elif platform == "windows":
 		env.Append(CCFLAGS = ["-O2", "-EHsc", "-DNDEBUG", "-MD"])
 	
 	target_path += "win" + str(target_arch)
-	godot_cpp_library += ".windows." + str(target_arch)
-
 
 
 env.Append(CPPPATH=[
 	godot_headers_path,
-	discord_rpc_path + "/include/",
-	discord_rpc_path + "/src/",
-	godot_bindings_path + "/include/",
-	godot_bindings_path + "/include/core/",
+	discord_rpc_path + "/include",
+	discord_rpc_path + "/src",
+	godot_bindings_path + "/include",
+	godot_bindings_path + "/include/gen",
+	godot_bindings_path + "/include/core",
 ])
 
-env.Append(LIBPATH=[ godot_bindings_path + "/bin/", discord_rpc_path + "/lib/" ])
+
+godot_cpp_library = "lib{}.{}.{}.{}".format(godot_cpp_library, platform, target, target_arch)
+env.Append(LIBPATH=[ godot_bindings_path + "/bin", discord_rpc_path + "/lib" ])
 env.Append(LIBS=[ godot_cpp_library, "discord-rpc", "Advapi32"])
 
 sources = []

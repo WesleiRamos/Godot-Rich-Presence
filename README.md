@@ -1,6 +1,7 @@
+
 # Godot-Rich-Presence
 
-Godot Rich Presence é uma biblioteca em GDNative para uso do rich presence do Discord na Godot engine 3.0.
+Godot Rich Presence é uma biblioteca em GDNative para uso do rich presence do Discord na Godot engine 3.1.
 
 ![Rich Presence](https://i.imgur.com/5IxTNBL.png)
 
@@ -95,7 +96,7 @@ Na pasta _example_ há um exemplo simples de como você deve usar.
 
 Clone este repositório e depois clone os seguintes repositórios:
 - https://github.com/discordapp/discord-rpc
-- https://github.com/GodotNativeTools/godot-cpp/tree/3.0
+- https://github.com/GodotNativeTools/godot-cpp
 
 Tenha certeza que o diretório se parece com:
 ```

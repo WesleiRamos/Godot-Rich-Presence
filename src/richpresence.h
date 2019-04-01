@@ -1,13 +1,14 @@
 #include <Godot.hpp>
-#include <Node.hpp>
+#include <Reference.hpp>
 #include <discord_rpc.h>
 
 namespace godot {
-	class RichPresence: public godot::GodotScript<Node> {
+	class RichPresence: public Reference {
 		
-		GODOT_CLASS(RichPresence)
+		GODOT_CLASS(RichPresence, Reference)
 
 		public:
+			void _init();
 			~RichPresence();
 
 			static void _register_methods();
