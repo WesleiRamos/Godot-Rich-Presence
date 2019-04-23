@@ -9,7 +9,7 @@ Godot Rich Presence is a library made with GDNative that makes it possible to us
 
 ### init(Dictionary initialize)
 
-| Key           | optional | descrição | padrão |
+| Key           | optional | description | default |
 | ------------- | -------- | ---------------------------- | --- |
 | app_id        | **no**      | id of your discord app| **-** |
 | auto_register | **yes**      | If you want discord to create a protocol(?) of your game in the user's pc | 1 |
@@ -19,7 +19,7 @@ More info in: [Initialization](https://discordapp.com/developers/docs/rich-prese
 
 ### update(Dictionary presence)
 
-| chave | tipo | descrição |
+| key | type | description|
 | ----- | ---- | --------- |
 | state | string | actual status |
 | details | string | What's the player doing |
