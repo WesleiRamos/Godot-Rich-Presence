@@ -1,72 +1,73 @@
 
 # Godot-Rich-Presence
 
-Godot Rich Presence é uma biblioteca em GDNative para uso do rich presence do Discord na Godot engine 3.1.
+##### Leia em [português Brasil](README_PTBR.md).
+
+Godot Rich Presence is a lib made with GDNative to use rich presence do Discord in Godot engine 3.1.
 
 ![Rich Presence](https://i.imgur.com/5IxTNBL.png)
 
-## Funções
+## Functions
 
 ### init(Dictionary initialize)
-Recebe um **dict** com as seguintes chaves:
+Receives a **dict** with following keys:
 
-| chave         | opcional | descrição | padrão |
+| key         | optional | description | default |
 | ------------- | -------- | ---------------------------- | --- |
-| app_id        | **não**      | id do seu aplicativo discord | **-** |
-| auto_register | **sim**      | caso você queira que o discord crie um protocolo para seu jogo no computador do usuário | 1 |
-| steam_id      | **sim**      | id do seu jogo steam, caso ele seja distribuido na steam | null  |
+| app_id        | **no**      | id of your discord app | **-** |
+| auto_register | **yes**      | whether or not to register an application protocol for your game on the player's computer — necessary to launch games from Discord | 1 |
+| steam_id      | **yes**      | your game's Steam application id, if your game is distributed on Steam | null  |
 
-Mais informações em [Initialization](https://discordapp.com/developers/docs/rich-presence/how-to#initialization)
+More information in [Initialization](https://discordapp.com/developers/docs/rich-presence/how-to#initialization)
 
 ### update(Dictionary presence)
-Atualiza a presença, recebe um **dict** com as seguintes chaves:
+Update the presence, receives a **dict** with following keys:
 
-| chave | tipo | descrição |
+| key | type | description |
 | ----- | ---- | --------- |
-| state | string | status atual do jogador |
-| details | string |o que o jogador está fazendo |
-| start_timestamp | int | quando a partida começou, se adicionado aparecerá _tempo decorrido_ |
-| end_timestamp | int | quando a partida irá finalizar, se adicionado aparecerá _tesmpo restante_ |
-| large_image_key | string | nome da imagem enviada que aparecerá como icone grande |
-| large_image_text | string | tooltip que aparecerá quando o ponteiro do mouse fica em cima do icone grande |
-| small_image_key | string | nome da imagem enviada que aparecerá como icone pequeno |
-| small_image_text | string | tooltip que aparecerá quando o ponteiro do mouse fica em cima do icone pequeno |
-| party_id | string | id do lobby/grupo/festa no qual o jogador está |
-| party_size | int | quantidade de jogadores que estão no lobby/grupo/festa com o jogador |
-| party_max | int | quantidade máxima de jogadores que podem estar no lobby/grupo/festa com o jogador |
-| spectate_secret | string | hash único para o botão _Assistir_ |
-| join_secret | string | hash único para os convites e para o botão _Pedir pra juntar-se_ |
+| state | string | the current player state |
+| details | string | what the player is doing |
+| start_timestamp | int | when the game started, it will show _elapsed_ |
+| end_timestamp | int | when the game will end, it will show _remaining_ |
+| large_image_key | string | name of the uploaded image for the large profile artwork |
+| large_image_text | string | tooltip for the _large_image_key_ |
+| small_image_key | string | name of the uploaded image for the small profile artwork |
+| small_image_text | string | tootltip for the _small_image_key_ |
+| party_id | string | id of the player's lobby/group/party |
+| party_size | int | current size of the player's lobby/group/party |
+| party_max | int | max size of the player's lobby/group/party |
+| spectate_secret | string | unique hashed string for _Spectate_ button |
+| join_secret | string | unique hashed string for _Ask to join_ |
 
-OBS: para usar **party_size** é necessário definir **party_max** e vice-versa.
+OBS., to use **party_size** you need set **party_max** and vice-versa.
 
-Mais informações em [Updating Presence](https://discordapp.com/developers/docs/rich-presence/how-to#updating-presence) e [Rich Presence Field Requirements](https://discordapp.com/developers/docs/rich-presence/how-to#rich-presence-field-requirements)
+More information in [Updating Presence](https://discordapp.com/developers/docs/rich-presence/how-to#updating-presence) and [Rich Presence Field Requirements](https://discordapp.com/developers/docs/rich-presence/how-to#rich-presence-field-requirements)
 
 ### clear()
-Reseta a presença
+Reset the presence
 
 ### reply(String userId, int response)
-Responde a uma solicitação para juntar-se a partida. Respostas possíveis:
+Responds a request to join in the match, possible answers:
 
-| resposta | código |
+| response | code   |
 | -------- | ------ |
-| NÃO      | 0      |
-| SIM      | 1      |
-| IGNORAR  | 2      |
+| NO       | 0      |
+| YES      | 1      |
+| IGNORE   | 2      |
 
-Mais informações em [Ask to join](https://discordapp.com/developers/docs/rich-presence/how-to#ask-to-join)
+More information in [Ask to join](https://discordapp.com/developers/docs/rich-presence/how-to#ask-to-join)
 
 ### run_callbacks()
-Os callbacks do Discord-rpc só serão chamados após essa função ser chamada, se possível crie um timer para executa-la de tempos em tempos.
-Mais informações em [So, how does it work?](https://discordapp.com/developers/docs/rich-presence/how-to#so-how-does-it-work)
+The Discord-rpc callback will only be called when this function is called, create a timer to exec this function in a interval of time.
+More information in [So, how does it work?](https://discordapp.com/developers/docs/rich-presence/how-to#so-how-does-it-work)
 
 ### shutdown()
-Desconecta do Discord
+Shutdown Rich Presence
 
 ## Callbacks discord-rpc
+It's possible define some signals to discord-rpc events, when the discord-rpc callbacks are called a signal will be emitted, the signals are:
 
-É possível definir alguns sinais para eventos do discord-rpc, quando os callbacks forem chamados um sinal será emitido, os sinais são:
-
-| sinal         | argumentos                             |
+| signal        | arguments                              |
 | ------------- | -------------------------------------- |
 | ready         | **dict** user                          |
 | disconnected  | **int** error_code, **string** message |
@@ -75,30 +76,30 @@ Desconecta do Discord
 | join_request  | **dict** request                       |
 | spectate_game | **string** secret                      |
 
-**ready** e **join_request** recebem um **dict** que contém as seguintes chaves:
+**ready** and **join_request** receives a **dict** with following keys:
 
-| chave         | descrição                         |
+| key           | description                       |
 | ------------- | --------------------------------- |
-| user_id       | id da conta do discord do usuário |
+| user_id       | id of player's discord account    |
 | username      |                                   |
-| discriminator | numero da tag                     |
-| avatar        | hash do avatar                    |
+| discriminator | discord discriminator (e.g 2077)  |
+| avatar        | avatar's hash                     |
 
-OBS: Eu apenas testei os eventos **ready** e **error**, acredito que os outros estejam funcionando também.
+OBS., I tried only the events **ready** and **error**, I believe the others works too.
 
-Mais informações em [So, how does it work?](https://discordapp.com/developers/docs/rich-presence/how-to#so-how-does-it-work)
+More information in [So, how does it work?](https://discordapp.com/developers/docs/rich-presence/how-to#so-how-does-it-work)
 
-## Como usar
+## How to use?
 
-Na pasta _example_ há um exemplo simples de como você deve usar.
+The _example_ folder has a yesple example of how to use it.
 
-## Compilando
+## Compiling
 
-Clone este repositório e depois clone os seguintes repositórios:
+Clone this repo and then clone the following repositories:
 - https://github.com/discordapp/discord-rpc
 - https://github.com/GodotNativeTools/godot-cpp
 
-Tenha certeza que o diretório se parece com:
+Make sure the directory looks like:
 ```
 godot-cpp
 discord-rpc
@@ -107,4 +108,4 @@ Godot-Rich-Presence
 └── src/
 ```
 
-Execute o SConstruct usando o comando `scons platform=plataforma arch=64`, os arquivoc compilados irão ficar dentro da pasta `bin`.
+Run SConstruct using the command `scons platform=plataforma arch=64`, the compiled files will be in `bin` folder.
