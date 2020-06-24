@@ -91,7 +91,7 @@ More information in [So, how does it work?](https://discordapp.com/developers/do
 
 ## How to use?
 
-The _example_ folder has a yesple example of how to use it.
+The _example_ folder has a simple example of how to use it.
 
 ## Compiling
 
